@@ -1,4 +1,5 @@
 vertx-imap
 ==========
 
-An Imap client for using vertx - Javascript
+An vertx-based async Imap client  - Javascript
+
