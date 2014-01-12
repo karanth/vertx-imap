@@ -1,6 +1,6 @@
 var vertx = require('vertx');
 var console = require('vertx/console');
-load('../lib/IMAPClient.js');
+load("IMAPClient.js");
 
 
 var client1 = new IMAPClient('imap.gmail.com', 993, {isSSL : true});
