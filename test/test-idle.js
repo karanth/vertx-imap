@@ -27,7 +27,7 @@ client1.connect(function(error){
     });
 
    client1.sendCommand(
-    { command : "SELECT \"[Gmail]/All Mail\"",
+    { command : "EXAMINE \"[Gmail]/All Mail\"",
            callback : function(buffer){
                                 console.log(">>>>>>>>>>>>>>>");
                                 console.log(buffer);
@@ -69,16 +69,22 @@ client1.connect(function(error){
     }
     );
 
-  /*  client1.sendCommand(
-      { command : "DONE",
-          callback : function(buffer){
-                    console.log(">>>>>>>>>>>>");
-                    console.log(buffer);
-          }
-      }
+});
 
-    );
-    */
+
+//Execute another command after 10s.
+vertx.setTimer(10000, function(){
+       client1.sendCommand(
+          { command : "NOOP",
+            callback : function(buffer){
+                  console.log(">>>>>>>>>>>>");
+                  console.log(buffer);
+            }
+
+
+          }
+          );
+
 
 });
 

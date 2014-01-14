@@ -17,18 +17,16 @@ client1.connect(function(error){
     });
 
    client1.sendCommand(
-    { command : "LOGIN <your username> <your password>",
-          callback : function(buffer){
+    {   command : "LOGIN <username> <password>",
+        callback : function(buffer){
                            console.log(">>>>>>>>>>>>>>>");
                            console.log(buffer);
-
-                           }
+                   }
 
     });
-
 });
 
-var client2 = new IMAPClient('imap.gmail.com', 993, {isSSL : true});
+/*var client2 = new IMAPClient('imap.gmail.com', 993, {isSSL : true});
   client2.connect(function(error){
     // console.log(error);
      console.log(client2.status);
@@ -52,3 +50,4 @@ var client2 = new IMAPClient('imap.gmail.com', 993, {isSSL : true});
       });
 
   });
+  */
