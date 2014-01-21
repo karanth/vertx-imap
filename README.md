@@ -51,12 +51,16 @@ You can create as many clients as you wish and check the number of threads and m
 
 Running the code in vertx is,
 
-     run test-basic.js -cp ../lib    
+     run test-idle.js -cp ../lib
 
 The -cp option is used to retrieve scripts from other directories.     
-    
+
+The IMAP IDLE command is supported now. The test-idle.js test runs a bunch of commands ending with the idle command. After a few seconds, it sends a NOOP command to cancel the idle.
+
+The basic test, test-basic.js, is now a command line utility. It doesn't support IDLE and works in a request-response fashion i.e. on request it waits for a response from the server. On a response it blocks for a request from the client.
+
+
 #### Next Steps    
-* IMAP Idle support
 * Abstractions over IMAP commands - For example, methods for login, choosing and changing mailboxes
 * Marshalling command responses - For example, an array of mails is returned if these emails are requested.
 
