@@ -57,8 +57,9 @@ The -cp option is used to retrieve scripts from other directories.
 
 The IMAP IDLE command is supported now. The test-idle.js test runs a bunch of commands ending with the idle command. After a few seconds, it sends a NOOP command to cancel the idle.
 
-The basic test, test-basic.js, is now a command line utility. It doesn't support IDLE and works in a request-response fashion i.e. on request it waits for a response from the server. On a response it blocks for a request from the client.
+The basic test, test-basic.js, is now a command line utility. It doesn't support IDLE and works in a request-response fashion i.e. on a request, it waits for a response from the server. On a response it blocks for a request from the client.  The IMAP server and other config information is defined in a separate file and is included with the -conf parameter.
 
+    run test-basic.js -cp ../lib -conf test-basic-params.json
 
 #### Next Steps    
 * Abstractions over IMAP commands - For example, methods for login, choosing and changing mailboxes
