@@ -1,3 +1,4 @@
+"use strict";
 var vertx = require('vertx');
 var console = require('vertx/console');
 load("IMAPClient.js");

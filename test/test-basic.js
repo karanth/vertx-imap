@@ -1,53 +1,43 @@
+"use strict";
 var vertx = require('vertx');
 var console = require('vertx/console');
+var container = require('vertx/container');
+
 load("IMAPClient.js");
 
+var client;
 
-var client1 = new IMAPClient('imap.gmail.com', 993, {isSSL : true});
+var JavaBufferedReader = java.io.BufferedReader;
+var JavaInputStreamReader = java.io.InputStreamReader;
+var JavaSystem = java.lang.System;
 
-client1.connect(function(error){
-   console.log(client1.status);
-   client1.sendCommand(
-    {   command : "CAPABILITY",
-        callback : function(buffer){
-                    console.log(">>>>>>>>>>>>>>>");
-                    console.log(buffer);
+var reader = new JavaBufferedReader( new JavaInputStreamReader(JavaSystem['in']) );
 
-                    }
-    });
 
-   client1.sendCommand(
-    {   command : "LOGIN <username> <password>",
-        callback : function(buffer){
-                           console.log(">>>>>>>>>>>>>>>");
-                           console.log(buffer);
-                   }
+function processRequest(){
+   var cmd = reader.readLine().split("\n")[0];
+   client.sendCommand({ command: cmd, callback: processResponse});
+}
 
-    });
-});
+function processResponse(response){
+    console.log(response);
+    processRequest();
+}
 
-/*var client2 = new IMAPClient('imap.gmail.com', 993, {isSSL : true});
-  client2.connect(function(error){
-    // console.log(error);
-     console.log(client2.status);
-     client2.sendCommand(
-      {   command : "CAPABILITY",
-          callback : function(buffer){
-                      console.log(">>>>>>>>>>>>>>>");
-                      console.log(buffer);
 
-                      }
-      });
+if(container.config){
+    client = new IMAPClient(container.config.server, container.config.port, container.config.config);
+    client.connect(imapConnectionHandler);
+}
 
-     client2.sendCommand(
-      { command : "LOGIN <another username> <another password>",
-            callback : function(buffer){
-                             console.log(">>>>>>>>>>>>>>>");
-                             console.log(buffer);
 
-                             }
+function imapConnectionHandler(error){
 
-      });
+    if(!error){
+      processRequest();
+    }
+    else{
+      console.log(error);
+    }
+}
 
-  });
-  */
