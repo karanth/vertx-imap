@@ -3,7 +3,7 @@ vertx-imap
 
 A vertx-based async Imap client  - Javascript
 
-_vertx_ - http://vertx.io. is an upcoming app framework with super cool features like async IO, message passing, actor-like concurrency, modularity and support for multiple languages (Polyglot). Vertx is a JVM based framework. 
+[vertx] (http://vertx.io), is an upcoming app framework with super cool features like async IO, message passing, actor-like concurrency, modularity and support for multiple languages (Polyglot). Vertx is a JVM based framework.
 
 Javascript is used to code this client. The choice is mainly to aid quick prototyping. The motivation behind writing this imap client is a need to support a large number of mail clients using a small number of threads at our company. In that sense,  async IO is the primary vertx feature used for this project. Of course, there are many other choices to achieve this task, like node.js. The community behind it is also great and there are a few projects that do imap clients for node.js. The JVM platform that vertx runs on makes it attractive for us as all our development happens on the JVM. The hope is to be able to import existing code into Vertx at some point of time in the future.
 
@@ -51,15 +51,15 @@ You can create as many clients as you wish and check the number of threads and m
 
 Running the code in vertx is,
 
-     run test-idle.js -cp ../lib
+     vertx run test-idle.js -cp ../lib
 
 The -cp option is used to retrieve scripts from other directories.     
 
-The IMAP IDLE command is supported now. The test-idle.js test runs a bunch of commands ending with the idle command. After a few seconds, it sends a NOOP command to cancel the idle.
+The IMAP IDLE command is supported. The test-idle.js test runs a bunch of commands ending with the idle command. After a few seconds, it sends a NOOP command to cancel the idle.
 
-The basic test, test-basic.js, is now a command line utility. It doesn't support IDLE and works in a request-response fashion i.e. on a request, it waits for a response from the server. On a response it blocks for a request from the client.  The IMAP server and other config information is defined in a separate file and is included with the -conf parameter.
+The basic test, test-basic.js, is a command line utility. It doesn't support IDLE and works in a request-response fashion i.e. on a request, it waits for a response from the server. On a response it blocks for a request from the client.  The IMAP server and other config information is defined in a separate file and is included with the -conf parameter.
 
-    run test-basic.js -cp ../lib -conf test-basic-params.json
+    vertx run test-basic.js -cp ../lib -conf test-basic-params.json
 
 #### Next Steps    
 * Abstractions over IMAP commands - For example, methods for login, choosing and changing mailboxes
